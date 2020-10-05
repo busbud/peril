@@ -33,28 +33,45 @@ you could write tests which:
 
 ---
 
+### Peril vs GitHub Actions. 
+
+80% of Peril is available today in GitHub Actions. Key things which are not:
+
+- Multi-repo support ([which is on the Actions roadmap](https://twitter.com/chrisrpatterson/status/1162531343248633858))
+- Pre-workflow evaluation on webhook data (basically the ability to refuse to run the workflow unless something is set in the webhook JSON)
+- Triggering delayed jobs from webhooks (e.g. do this thing in 5m)
+
+Is this enough to warrant self-hosting? Maybe, but it's pushing it a bit if you aren't comfortable hosting a JS project.
+Danger got extended with a [lot of Peril's features](https://github.com/danger/danger-js/blob/master/CHANGELOG.md#500) in order to better support GitHub Actions during the alpha. 
+
+Given that I, Orta, can't install Peril on the Microsoft GitHub org, and GitHub Actions has most of Peril's features - it's unlikely that I'll be building much more into the core. I'll keep it ticking though, it's not much work.
+
+---
+
+### I want to use Peril
+
+You have two choices:
+
+- Wait for me to ship Peril to production (probably mid-2019)
+- Self-host your own Peril
+
 ### I want to run Peril for my org
 
-OK, I made a quick tutorial for [running a private Peril against your org](./docs/setup_for_org.md).
+OK, I made a quick tutorial for [running a private Peril against your org](./docs/setup_for_org.md) - this is for
+Heroku, but the underlying principles work for all of them.
 
 ### I want to hack on Peril!
 
 Ace, great, cool. So, it's a bit of a process. I'm not sure if this will get easier in time. It's a complex app. You can
-find out [more here](./docs/local_dev.md)
+find out [more here](./docs/local_dev.md).
 
-## How does Peril work?
+### This Repo
 
-<img src="https://github.com/danger/peril/raw/master/docs/images/peril-setup.png">
+This repo is a mono-repo with three main responsibilities:
 
-There are some key files where the magic happens:
-
-- [source/routing/router.ts](source/routing/router.ts) - Decide what work to with GitHub events
-- [source/githubevents/github_runner.ts](source/github/events/github_runner.ts) - Figuring out what Dangerfiles to run
-- [source/danger/danger_runner.ts](source/danger/danger_runner.ts) - Coordinating running the Dangerfiles
-- [source/runner/run.ts](source/runner/run.ts) - Run the Dangerfile in a sandbox
-
-This is a _reasonably tested_ project, there's a lot in places where the code isn't going to change much now so they're
-slowly getting covered.
+- [api](/api) - The Peril WebHook + API
+- [dashboard](/dashboard) - The Admin Panel for logged in users
+- [web](/web) - A static website for the public
 
 ### Docs
 

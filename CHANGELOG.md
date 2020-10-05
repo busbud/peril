@@ -1,3 +1,16 @@
+# 2019 - March 3rd
+
+Support having the Peril runtime be an AWS lamda job - orta
+
+# 2019 - Feb 9
+
+Move to a mono-repo - orta
+
+# 2018 - Nov 10
+
+You can opt out of checks support in your settings by adding `"disable_github_check": true` to your settings section. -
+orta
+
 ## 2018 - Sept 8
 
 **BREAKING**
